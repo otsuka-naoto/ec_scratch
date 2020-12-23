@@ -9,7 +9,7 @@
  <?php else: ?> 
     <p>good afternoon!</p>
  <?php endif; ?>
- <form action="form.php" method="post">
+ <form action="db.php" method="post">
  let's write your name!
  <input type="text" name="name"/>
  <input type="submit" value="submit"/>
