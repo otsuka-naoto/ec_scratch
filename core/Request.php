@@ -1,10 +1,11 @@
 <?php
 
-class Reqest{
+class Request
+{
 
     public function isPost()
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return true;
         }
 
@@ -13,7 +14,7 @@ class Reqest{
 
     public function isGet($name, $default = null)
     {
-        if(isset($_GET[$name])){
+        if (isset($_GET[$name])) {
             return $_GET[$name];
         }
 
@@ -22,7 +23,7 @@ class Reqest{
 
     public function getPost($name, $default = null)
     {
-        if(isset($_POST[$name])){
+        if (isset($_POST[$name])) {
             return $_POST[$name];
         }
 
@@ -31,7 +32,7 @@ class Reqest{
 
     public function getHost()
     {
-        if(!empty($_SERVER['HTTP_HOST'])){
+        if (!empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
 
@@ -40,7 +41,7 @@ class Reqest{
 
     public function isSsl()
     {
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'){
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             return true;
         }
 
@@ -51,6 +52,32 @@ class Reqest{
     {
         return $_SERVER['REQUEST_URI'];
     }
+
+    public function getBaseURL()
+    {
+        $script_name = $_SERVER['SCRIPT_NAME'];
+        $reqest_uri = $this->getReqestUri();
+
+        if (0 === strpos($reqest_uri, $script_name)) {
+            return $script_name;
+        } else if (0 === strpos($reqest_uri, dirname($script_name))) {
+            return rtrim(dirname($script_name), '/');
+        }
+        return '';
+    }
+
+    public function getPathInfo()
+    {
+        $base_url = $this->getBaseURL();
+        $reqest_uri = $this->getReqestUri();
+
+        if (false !== ($pos = strpos($reqest_uri, '?'))) {
+            $reqest_uri=substr($reqest_uri,0,$pos);
+        }
+
+        $path_info = (string)substr($reqest_uri, strlen($base_url));
+
+        return $path_info;
+    }
 }
 
-?>
