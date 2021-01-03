@@ -32,9 +32,6 @@ class Router
 
     public function resolve($path_info)
     {
-
-
-
         return false;
     }
 }
