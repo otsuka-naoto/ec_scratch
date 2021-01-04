@@ -18,7 +18,7 @@ abstract class Application
         $this->response = new Response();
         $this->session = new Session();
         $this->db_manager = new DbManager();
-        $this->router = new Router($this->registerRoutes());
+        $this->router = new Router($this->registerRoutes);
     }
 
     abstract public function getRootDir();
