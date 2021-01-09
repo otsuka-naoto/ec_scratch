@@ -8,5 +8,19 @@ class View
 
     public function __construct($base_dir, $defaults = array())
     {
+        $this->base_dir = $base_dir;
+        $this->defaults = $defaults;
+    }
+
+    public function render($_path, $_variables = array(), $_layout = false)
+    {
+        $_file = $this->base_dir . '/' . $_path . '.php';
+        extract(array_merge($this->defaults, $_variables));
+        ob_start();
+        ob_implicit_flush(0);
+        require $_file;
+        $content = ob_get_clean();
+
+        return $content;
     }
 }
