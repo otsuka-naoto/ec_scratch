@@ -16,10 +16,10 @@ class EcScratchApplication extends Application
 
     protected function configure()
     {
-        $this->db_manager->connect('master', array(
-            'dsn' => 'mysql:dbname=ec_scratch;host=localhost',
-            'user' => 'root',
-            'password' => 'root',
-        ));
+        // $this->db_manager->connect('master', array(
+        //     'dsn' => 'mysql:dbname=ec_scratch;host=localhost',
+        //     'user' => 'root',
+        //     'password' => 'root',
+        // ));
     }
 }
