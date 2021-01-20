@@ -1,11 +1,14 @@
+<?php echo "a" ?>
+
+
 <html>
  <head>
-  <title>サインアップ</title>
+  <title>アカウント登録画面</title>
  </head>
  <body>
- <form action="user_regist_db.php" method="post">
+ <form action="/account/register" method="post">
  </br>
- Name:<input type="text" name="name"/>
+ ID:<input type="text" name="name"/>
  </br>
  Pass: <input type="text" name="pass"/>
  </br>

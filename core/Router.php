@@ -6,7 +6,7 @@ class Router
 
     public function __construct($definitions)
     {
-        //$this->routes = $this->compileRoutes($definitions);
+        $this->routes = $this->compileRoutes($definitions);
     }
 
     public function compileRoutes($definitions)
@@ -14,7 +14,7 @@ class Router
         $routes = array();
 
         foreach ($definitions as $url => $params) {
-
+echo $params;
             $tokens = explode('/', ltrim($url, '/'));
             foreach ($tokens as $i => $token) {
                 if (0 === strpos($token, ':')) {

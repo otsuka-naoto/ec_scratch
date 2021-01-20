@@ -18,7 +18,7 @@ abstract class Application
         $this->response = new Response();
         $this->session = new Session();
         $this->db_manager = new DbManager();
-        $this->router = new Router($this->registerRoutes);
+        $this->router = new Router($this->registerRoutes());
     }
 
     abstract public function getRootDir();
@@ -69,19 +69,21 @@ abstract class Application
     {
         $params = $this->router->resolve($this->request->getPathInfo());
 
+        echo $params;
+
         $controller = $params['controller'];
         $action = $params['action'];
         $this->runAction($controller, $action, $params);
-        $this->response->send();
+        // $this->response->send();
     }
 
     public function runAction($controller_name, $action, $params = array())
     {
         $controller_class = ucfirst($controller_name) . 'Controller';
-        $controller = $this->findController($controller_class);
+        // $controller = $this->findController($controller_class);
 
-        $content = $controller->run($action, $params);
-        $this->response->setContent($content);
+        // $content = $controller->run($action, $params);
+        // $this->response->setContent($content);
     }
 
     protected function findController($controller_class)
@@ -91,6 +93,6 @@ abstract class Application
         }
         require_once $controller_file;
         
-        return new $controller_class($this);
+        // return new $controller_class($this);
     }
 }
