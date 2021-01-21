@@ -11,15 +11,11 @@ class EcScratchApplication extends Application
 
     protected function registerRoutes()
     {
-        return array();
+        return array(
+            '/account'=>array('controller'=>'account','action'=>'index'),
+            '/account/:action'=>array('controller'=>'account'),
+        );
     }
 
-    protected function configure()
-    {
-        // $this->db_manager->connect('master', array(
-        //     'dsn' => 'mysql:dbname=ec_scratch;host=localhost',
-        //     'user' => 'root',
-        //     'password' => 'root',
-        // ));
-    }
+   
 }

@@ -1,12 +1,7 @@
-<?php echo "a" ?>
+<?php $this->setLayoutVar('title','アカウント登録画面') ?>
+<h2>アカウント登録画面</h2>
 
-
-<html>
- <head>
-  <title>アカウント登録画面</title>
- </head>
- <body>
- <form action="/account/register" method="post">
+ <form action="<?php echo $base_url; ?>/account/register" method="post">
  </br>
  ID:<input type="text" name="name"/>
  </br>
@@ -14,5 +9,4 @@
  </br>
  <input type="submit" value="login"/>
  </form>
- </body>
-</html>
+
