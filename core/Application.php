@@ -68,9 +68,7 @@ abstract class Application
     public function run()
     {
         $params = $this->router->resolve($this->request->getPathInfo());
-
-        echo $params;
-
+        echo "5" . $params['controller'] . $params['action'];
         $controller = $params['controller'];
         $action = $params['action'];
         $this->runAction($controller, $action, $params);
@@ -80,19 +78,28 @@ abstract class Application
     public function runAction($controller_name, $action, $params = array())
     {
         $controller_class = ucfirst($controller_name) . 'Controller';
-        // $controller = $this->findController($controller_class);
-
-        // $content = $controller->run($action, $params);
+        echo "6" . $controller_class;
+        echo "fix0";
+        $controller = $this->findController($controller_class);
+        echo "fix";
+        $content = $controller->run($action, $params);
         // $this->response->setContent($content);
     }
 
     protected function findController($controller_class)
     {
-        if(!class_exists($controller_class)){
+        if (!class_exists($controller_class)) {
             $controller_file = $this->getControllerDir() . '/' . $controller_class . '.php';
         }
+        if(!is_readable($controller_file)){
+            return false;
+        }
+        echo "7" . $controller_file;
         require_once $controller_file;
-        
-        // return new $controller_class($this);
+        if (!class_exists($controller_class)) {
+            return false;
+        }
+
+        return new $controller_class($this);
     }
 }

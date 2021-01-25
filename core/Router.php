@@ -14,7 +14,7 @@ class Router
         $routes = array();
 
         foreach ($definitions as $url => $params) {
-echo $params;
+            echo $params;
             $tokens = explode('/', ltrim($url, '/'));
             foreach ($tokens as $i => $token) {
                 if (0 === strpos($token, ':')) {
@@ -32,6 +32,17 @@ echo $params;
 
     public function resolve($path_info)
     {
+        if ('/' !== substr($path_info, 0, 1)) {
+            $path_info = '/' . $path_info;
+        }
+
+        foreach ($this->routes as $pattern => $params) {
+
+            if (preg_match($pattern, $path_info, $matches)) {
+                $params = array_merge($params, $matches);
+                return $params;
+            }
+        }
         return false;
     }
 }
