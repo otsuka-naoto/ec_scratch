@@ -42,4 +42,16 @@ abstract class Controller
         return $view->render($path, $variables, $layout);
     }
 
+
+    protected function redirect($url)
+    {
+        if (!preg_match('https?:/', $url)) {
+            $protocol = $this->request->isSsl() ? 'https://' : 'http://';
+            $host = $this->request->getHost();
+            $base_url = $this->request->getBaseUrl();
+            $url = $protocol . $host . $url;
+        }
+
+        $this->response->setHttpHeader('location', $url);
+    }
 }
