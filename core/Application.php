@@ -68,22 +68,19 @@ abstract class Application
     public function run()
     {
         $params = $this->router->resolve($this->request->getPathInfo());
-        echo "5" . $params['controller'] . $params['action'];
-        $controller = $params['controller'];
+        $controller ="Account"; // $params['controller'];
         $action = $params['action'];
         $this->runAction($controller, $action, $params);
-        // $this->response->send();
+        $this->response->send();
     }
 
     public function runAction($controller_name, $action, $params = array())
     {
         $controller_class = ucfirst($controller_name) . 'Controller';
-        echo "6" . $controller_class;
-        echo "fix0";
         $controller = $this->findController($controller_class);
-        echo "fix";
+//この手前のインスタンス化で落ちる
         $content = $controller->run($action, $params);
-        // $this->response->setContent($content);
+        $this->response->setContent($content);
     }
 
     protected function findController($controller_class)
@@ -94,12 +91,11 @@ abstract class Application
         if(!is_readable($controller_file)){
             return false;
         }
-        echo "7" . $controller_file;
         require_once $controller_file;
         if (!class_exists($controller_class)) {
             return false;
         }
-
+        //ここでエラーで落ちる
         return new $controller_class($this);
     }
 }

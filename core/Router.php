@@ -14,15 +14,16 @@ class Router
         $routes = array();
 
         foreach ($definitions as $url => $params) {
-            echo $params;
             $tokens = explode('/', ltrim($url, '/'));
+
             foreach ($tokens as $i => $token) {
                 if (0 === strpos($token, ':')) {
                     $name = substr($token, 1);
-                    $token = '';
+                    $token = '(?P<' . $name . '>[^/]+)';
                 }
                 $tokens[$i] = $token;
             }
+
             $pattern = '/' . implode('/', $tokens);
             $routes[$pattern] = $params;
         }

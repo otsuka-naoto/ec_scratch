@@ -17,5 +17,9 @@ class EcScratchApplication extends Application
         );
     }
 
+    protected function configure(){
+        
+    }
+
    
 }
