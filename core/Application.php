@@ -21,6 +21,10 @@ abstract class Application
         $this->router = new Router($this->registerRoutes());
     }
 
+    protected function configure()
+    {
+    }
+
     abstract public function getRootDir();
 
     abstract protected function registerRoutes();
@@ -68,7 +72,7 @@ abstract class Application
     public function run()
     {
         $params = $this->router->resolve($this->request->getPathInfo());
-        $controller = "Account"; // $params['controller'];
+        $controller = $params['controller'];
         $action = $params['action'];
         $this->runAction($controller, $action, $params);
         $this->response->send();
@@ -91,7 +95,7 @@ abstract class Application
         // }
 
         $content = $controller->run($action, $params);
-echo "@@@@" . $content;
+        echo "@@@@" . $content;
         $this->response->setContent($content);
     }
 
@@ -112,5 +116,3 @@ echo "@@@@" . $content;
         return true;
     }
 }
-
-
