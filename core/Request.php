@@ -70,9 +70,9 @@ class Request
     {
         $base_url = $this->getBaseURL();
         $reqest_uri = $this->getReqestUri();
-        
+
         if (false !== ($pos = strpos($reqest_uri, '?'))) {
-            $reqest_uri=substr($reqest_uri,0,$pos);
+            $reqest_uri = substr($reqest_uri, 0, $pos);
         }
 
         $path_info = (string)substr($reqest_uri, strlen($base_url));
@@ -80,4 +80,3 @@ class Request
         return $path_info;
     }
 }
-

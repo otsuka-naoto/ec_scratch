@@ -7,8 +7,10 @@
 
 <body>
     <div id="header">
+    <h1><a href="<?php echo $base_url; ?>/">EC Scrach</a></h1>
     </div>
     <div id="main">
+    <?php echo $_content; ?>
     </div>
 </body>
 

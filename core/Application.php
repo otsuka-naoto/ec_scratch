@@ -72,9 +72,14 @@ abstract class Application
     public function run()
     {
         $params = $this->router->resolve($this->request->getPathInfo());
+        if ($params === false) {
+            //to-do
+        }
         $controller = $params['controller'];
         $action = $params['action'];
+
         $this->runAction($controller, $action, $params);
+
         $this->response->send();
     }
 
@@ -82,20 +87,14 @@ abstract class Application
     {
         $controller_class = ucfirst($controller_name) . 'Controller';
 
-        if ($this->findController($controller_class)) {
+        $controller = $this->findController($controller_class);
 
-            // $controller = new $controller_class;
-            // echo $controller;
+        if ($controller_class === false) {
+            //to-do
         }
-        $controller = new AccountController;
-        // echo "xxxxxxxxxxx" . $controller;
-
-        // if ($controller_class === false) {
-        //     //to-do
-        // }
 
         $content = $controller->run($action, $params);
-        echo "@@@@" . $content;
+
         $this->response->setContent($content);
     }
 
@@ -113,6 +112,7 @@ abstract class Application
                 return false;
             }
         }
-        return true;
+        $obj = new $controller_class($this);
+        return $obj;
     }
 }
