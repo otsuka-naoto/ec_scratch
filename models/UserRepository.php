@@ -20,4 +20,10 @@ class UserRepository extends DbRepository
     {
         return sha1($password . 'SecretKey');
     }
+
+    public function fetchByUserName($user_name)
+    {
+        $sql = " SELECT * FROM USER WHERE USER_NAME = :user_name ";
+        return $this->fetch($sql, array(':user_name' => $user_name));
+    }
 }

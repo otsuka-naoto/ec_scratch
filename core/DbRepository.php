@@ -31,5 +31,4 @@ class DbRepository
     {
         return $this->execute($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

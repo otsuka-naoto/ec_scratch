@@ -5,7 +5,7 @@ abstract class Application
     protected $request;
     protected $response;
     // protected $session;
-    // protected $db_manager;
+    protected $db_manager;
 
     public function __construct()
     {
@@ -17,7 +17,7 @@ abstract class Application
         $this->request = new Request();
         $this->response = new Response();
         // $this->session = new Session();
-        // $this->db_manager = new DbManager();
+        $this->db_manager = new DbManager();
         $this->router = new Router($this->registerRoutes());
     }
 
@@ -44,10 +44,10 @@ abstract class Application
     //     return $this->session;
     // }
 
-    // public function getDbManager()
-    // {
-    //     return $this->db_manager;
-    // }
+    public function getDbManager()
+    {
+        return $this->db_manager;
+    }
 
     public function getControllerDir()
     {

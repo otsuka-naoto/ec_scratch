@@ -8,7 +8,7 @@ abstract class Controller
     protected $request;
     protected $response;
     // protected $session;
-    // protected $db_manager;
+    protected $db_manager;
 
     public function __construct($application)
     {
@@ -17,7 +17,7 @@ abstract class Controller
         $this->request = $application->getRequest();
         $this->response = $application->getResponse();
         // $this->session=$application->getSession();
-        // $this=$application->getDbManager();
+        $this->application = $application->getDbManager();
     }
 
     public function run($action, $params = array())
@@ -40,7 +40,10 @@ abstract class Controller
             // 'session' => $this->session,
         );
 
-        $view = new View($this->application->getViewDir(), $defaults);
+        //to-do 取得できない
+        //  $obj = $this->application->getViewDir();
+        $obj = new EcScratchApplication;
+        $view = new View($obj->getViewDir(), $defaults);
 
         if (is_null($template)) {
             $template = $this->action_name;
@@ -50,7 +53,6 @@ abstract class Controller
 
         return $view->render($path, $variables, $layout);
     }
-
 
     protected function redirect($url)
     {
