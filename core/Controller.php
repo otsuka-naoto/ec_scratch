@@ -37,8 +37,6 @@ abstract class Controller
         $defaults = array(
             'request' => $this->request,
             'base_url' => $this->request->getBaseUrl(),
-            'user_name' => "test",
-
             // 'session' => $this->session,
         );
 
