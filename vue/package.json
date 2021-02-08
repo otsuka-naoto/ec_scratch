@@ -1,0 +1,12 @@
+{
+  "name": "vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build sfc.vue --public-url ."
+  },
+  "author": "",
+  "license": "ISC"
+}
+  
