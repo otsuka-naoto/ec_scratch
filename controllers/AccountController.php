@@ -7,12 +7,12 @@ class AccountController extends Controller
         return $this->render(array('_token' => 'account/signup'));
     }
 
-    public function registerAction()    
+    public function registerAction()
     {
         $token = $this->request->getPost('_token');
         $user_name = $this->request->getPost('user_name');
         $password = $this->request->getPost('password');
 
-        return $this->render(array('user_name'=>$user_name,'password'=>$password,'_token'=>$token),'signup');
+        return $this->render(array('user_name' => $user_name, 'password' => $password, '_token' => $token), 'signup');
     }
 }
