@@ -79,7 +79,6 @@ abstract class Application
         $action = $params['action'];
 
         $this->runAction($controller, $action, $params);
-
         $this->response->send();
     }
 
@@ -108,10 +107,11 @@ abstract class Application
         } else {
             require_once $controller_file;
 
-            if (!class_exists($controller_class)) {
+            if (!class_exists($controller_class)) {                
                 return false;
             }
         }
+
         $obj = new $controller_class($this);
         return $obj;
     }

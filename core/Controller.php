@@ -25,9 +25,11 @@ abstract class Controller
         $this->controller_name = strtolower(substr(get_class($this), 0, -10));
         $this->action_name = $action;
         $action_method = $action . 'Action';
+
         if (!method_exists($this, $action_method)) {
             //to-do
         }
+
         $content = $this->$action_method($params);
         return $content;
     }
