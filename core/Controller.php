@@ -7,7 +7,7 @@ abstract class Controller
     protected $application;
     protected $request;
     protected $response;
-    // protected $session;
+    protected $session;
     protected $db_manager;
 
     public function __construct($application)
@@ -16,7 +16,7 @@ abstract class Controller
         $this->application = $application;
         $this->request = $application->getRequest();
         $this->response = $application->getResponse();
-        // $this->session=$application->getSession();
+        $this->session = $application->getSession();
         $this->application = $application->getDbManager();
     }
 
@@ -39,7 +39,7 @@ abstract class Controller
         $defaults = array(
             'request' => $this->request,
             'base_url' => $this->request->getBaseUrl(),
-            // 'session' => $this->session,
+            'session' => $this->session,
         );
 
         //to-do 取得できない

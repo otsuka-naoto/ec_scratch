@@ -4,7 +4,7 @@ abstract class Application
 {
     protected $request;
     protected $response;
-    // protected $session;
+    protected $session;
     protected $db_manager;
 
     public function __construct()
@@ -16,7 +16,7 @@ abstract class Application
     {
         $this->request = new Request();
         $this->response = new Response();
-        // $this->session = new Session();
+        $this->session = new Session();
         $this->db_manager = new DbManager();
         $this->router = new Router($this->registerRoutes());
     }
@@ -39,10 +39,10 @@ abstract class Application
         return $this->response;
     }
 
-    // public function getSession()
-    // {
-    //     return $this->session;
-    // }
+    public function getSession()
+    {
+        return $this->session;
+    }
 
     public function getDbManager()
     {
@@ -107,7 +107,7 @@ abstract class Application
         } else {
             require_once $controller_file;
 
-            if (!class_exists($controller_class)) {                
+            if (!class_exists($controller_class)) {
                 return false;
             }
         }
