@@ -33,12 +33,16 @@ class Router
 
     public function resolve($path_info)
     {
+        // URIの先頭に/をつける
         if ('/' !== substr($path_info, 0, 1)) {
             $path_info = '/' . $path_info;
         }
 
+        // 配列 $this->routes をキー $pattern でパラメーター $params を順番に取得する
+        // $pattern にパス、$params は配列
         foreach ($this->routes as $pattern => $params) {
 
+            // リクエストパスにマッチした $params の配列を返す
             if (preg_match('#^' . $pattern . '$#', $path_info, $matches)) {
                 $params = array_merge($params, $matches);
                 return $params;
