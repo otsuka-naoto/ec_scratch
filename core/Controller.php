@@ -17,7 +17,7 @@ abstract class Controller
         $this->request = $application->getRequest();
         $this->response = $application->getResponse();
         $this->session = $application->getSession();
-        $this->application = $application->getDbManager();
+        $this->db_manager = $application->getDbManager();
     }
 
     public function run($action, $params = array())
@@ -66,5 +66,35 @@ abstract class Controller
         }
 
         $this->response->setHttpHeader('Location', $url);
+    }
+
+    protected function generateCsrfToken($form_name)
+    {
+        $key = 'csrf_tokens/' . $form_name;
+        $tokens = $this->session->get($key, array());
+        if (count($tokens) >= 10) {
+            array_shift($tokens);
+        }
+
+        $token = sha1($form_name . session_id() . microtime());
+        $tokens[] = $token;
+
+        $this->session->set($key, $tokens);
+
+        return $tokens;
+    }
+
+    protected function checkCsrfToken($form_name, $token)
+    {
+        $key = 'csrf_tokens/' . $form_name;
+        $tokens = $this->session->get($key, array());
+        if (false !== ($pos = array_search($token, $tokens, true))) {
+            unset($tokens[$pos]);
+            $this->session->get($key, array());
+
+            return true;
+        }
+
+        return false;
     }
 }
